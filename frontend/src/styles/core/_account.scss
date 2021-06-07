@@ -2,7 +2,6 @@
   .info {
     margin-bottom: 10px;
     @include flex();
-    // flex-wrap: wrap;
     justify-content: flex-start;
     flex-direction: row;
     align-items: center;

@@ -1,14 +1,3 @@
-/*
-    HTML5 Reset :: style.css
-    ----------------------------------------------------------
-    We have learned much from/been inspired by/taken code where offered from:
-    Eric Meyer                  :: http://meyerweb.com
-    HTML5 Doctor                :: http://html5doctor.com
-    and the HTML5 Boilerplate   :: http://html5boilerplate.com
--------------------------------------------------------------------------------*/
-
-/* Let's default this puppy out
--------------------------------------------------------------------------------*/
 
 html,
 body,
@@ -97,8 +86,6 @@ summary {
   display: block;
 }
 
-/* Handle box-sizing while better addressing child elements:
-   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
 html {
   box-sizing: border-box;
 }
@@ -109,8 +96,6 @@ html {
   box-sizing: inherit;
 }
 
-/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
-
 /* Responsive images and other embedded objects
 */
 img,
@@ -119,22 +104,10 @@ embed {
   max-width: 100%;
 }
 
-/*
-   Note: keeping IMG here will cause problems if you're using foreground images as sprites.
-     In fact, it *will* cause problems with Google Maps' controls at small size.
-    If this is the case for you, try uncommenting the following:
-#map img {
-        max-width: none;
-}
-*/
-
-/* force a vertical scrollbar to prevent a jumpy page */
 html {
   overflow-y: scroll;
 }
 
-/* we use a lot of ULs that aren't bulleted.
-    don't forget to restore the bullets within content. */
 ul {
   list-style: none;
 }

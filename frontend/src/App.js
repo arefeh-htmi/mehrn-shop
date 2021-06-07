@@ -8,7 +8,6 @@ import PublicScreens from "./screens/publicScreens/index";
 import CustomerScreens from "./screens/customerScreens/index";
 import AdminScreens from "./screens/adminScreens/index";
 import Notification from "./components/Notification.jsx";
-import './styles/style.scss';
 const App = () => {
   return (
     <Router>
