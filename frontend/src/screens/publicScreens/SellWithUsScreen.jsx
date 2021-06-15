@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import FormError from "../../components/Common/FormError";
-import Loader from "../../components/Loader";
+import Loader from "../../components/Common/Loader";
 import FormContainer from "../../components/FormContainer";
 import { sellWithUs, sellFormChange } from "../../actions/merchantActions";
 
@@ -50,7 +50,7 @@ class SellWithUsScreen extends React.PureComponent {
             <Form.Group controlId="email">
               <Form.Label>Email Address</Form.Label>
               <Form.Control
-                type="email"
+                type="text"
                 placeholder="Enter your full name"
                 value={sellFormData.email}
                 onChange={(e) => sellFormChange("email", e.target.value)}

@@ -6,11 +6,8 @@
 
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import FormError from "../../components/Common/FormError";
 import actions from "../../actions/index.js";
-import Loader from "../Loader";
-import SelectOption from "../Common/SelectOption";
 import FormContainer from "../FormContainer";
 import { Form, Button } from "react-bootstrap";
 
@@ -33,7 +30,7 @@ class Add extends React.PureComponent {
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                type="name"
+                type="text"
                 placeholder="Enter name"
                 value={brandFormData.name}
                 onChange={(e) => brandChange("name", e.target.value)}

@@ -51,7 +51,7 @@ class Edit extends React.PureComponent {
             <Form.Group controlId="name">
               <Form.Label>Name</Form.Label>
               <Form.Control
-                type="name"
+                type="text"
                 placeholder="Enter name"
                 value={brand.name}
                 onChange={(e) => brandEditChange("name", e.target.value)}

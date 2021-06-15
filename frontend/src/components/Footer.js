@@ -2,12 +2,19 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Newsletter from "./Newsletter";
-import { Form, Button } from "react-bootstrap";
 
 const Footer = () => {
   const infoLinks = [
     { id: 0, name: "Contact Us", to: "/contact" },
     { id: 1, name: "Sell With Us", to: "/sellwithus" },
+  ];
+  const customerServiseLinksArr = [
+    { id: 0, name: "Contact Us", to: "/contact" },
+    { id: 1, name: "Sell With Us", to: "/sellwithus" },
+    { id: 2, name: "Categories", to: "/categories" },
+    { id: 3, name: "Brands", to: "/brands" },
+    { id: 4, name: "Top Products", to: "/top" },
+
   ];
 
   const footerLinks = infoLinks.map((item) => (
@@ -17,7 +24,13 @@ const Footer = () => {
       </Link>
     </li>
   ));
-
+  const customerServiseLinks = customerServiseLinksArr.map((item) => (
+    <li key={item.id} className="footer-link">
+      <Link key={item.id} to={item.to}>
+        {item.name}
+      </Link>
+    </li>
+  ));
   return (
     <footer className="footer">
       <Container>
@@ -27,7 +40,7 @@ const Footer = () => {
               <h2>Customer Service</h2>
             </div>
             <div className="block-content">
-              <ul>{footerLinks}</ul>
+              <ul>{footerLinks }</ul>
             </div>
           </Col>
           <Col className="footer-block">
@@ -35,7 +48,7 @@ const Footer = () => {
               <h2>Links</h2>
             </div>
             <div className="block-content">
-              <ul>{footerLinks}</ul>
+              <ul>{customerServiseLinks}</ul>
             </div>
           </Col>
           <Col className="footer-block">
@@ -44,7 +57,7 @@ const Footer = () => {
               <Newsletter />
             </div>
 
-            <Row style={{margin:"0.6rem 0.9rem"}}>
+            <Row style={{ margin: "0.6rem 0.9rem" }}>
               <ul className="footer-social-item">
                 <li>
                   <a
@@ -83,7 +96,9 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-      <Row className="footer-copyright">MernShop by @arefeh_htmi</Row>
+      <Row className="footer-copyright">
+        <Col inline>MernShop by @arefeh_htmi</Col>
+      </Row>
     </footer>
   );
 };

@@ -1,6 +1,18 @@
 // Here you can add other styles
 .header {
   max-height: 3.5rem;
+  * {
+    color: $secondary;
+    transition: 200ms;
+    :hover {
+      color: lighten($secondary, 10);
+    }
+  }
+}
+input[class*="btn-outline"],
+button[class*="btn-outline"] {
+  border: 3px solid $secondary;
+  color: $secondary !important;
 }
 .footer {
   background: $primary;

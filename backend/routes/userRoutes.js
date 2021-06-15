@@ -14,8 +14,6 @@ import passport from "passport";
 import { protect } from "../middleware/authMiddleware.js";
 import { role } from "../middleware/rolecheckMiddleware.js";
 //register
-// router
-//   .route("/")
   router.post("/",registerUser)
   router.get("/",protect, role.checkRole(role.ROLES.Admin), getUsers);
 //login

@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "../Message";
+import Message from "./Message";
 export default function FormError(props) {
   console.log(props);
   return (

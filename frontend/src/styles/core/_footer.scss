@@ -45,7 +45,8 @@
 
     a {
       &:hover {
-        text-decoration: underline !important;
+        text-decoration: none;
+        // text-decoration: underline !important;
       }
     }
   }
@@ -84,26 +85,6 @@
     }
   }
 
-  .facebook-icon {
-    @include icon($facebook, 40px, 40px);
-    background-size: 100%;
-  }
-
-  .instagram-icon {
-    @include icon($instagram, 40px, 40px);
-    background-size: 100%;
-    border-radius: 50%;
-  }
-
-  .pinterest-icon {
-    @include icon($pinterest, 40px, 40px);
-    background-size: 100%;
-  }
-
-  .twitter-icon {
-    @include icon($twitter, 40px, 40px);
-    background-size: 100%;
-  }
 }
 
 /*
@@ -112,5 +93,7 @@
 
 .footer-copyright {
   text-align: center;
-  padding: 16px 0px;
+  padding: 8px 0px;
+  background-color: $secondary;
+  color: lighten($gray-light, 2);
 }

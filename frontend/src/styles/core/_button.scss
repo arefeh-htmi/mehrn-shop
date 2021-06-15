@@ -1,10 +1,10 @@
 // start input button styles
-input[type='button'],
-input[type='submit'],
-input[type='reset'],
-button[type='button'],
-button[type='submit'],
-button[type='reset'],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button[type="button"],
+button[type="submit"],
+button[type="reset"],
 button {
   border: none;
   background: transparent;
@@ -31,6 +31,17 @@ button {
 }
 // end input button styles
 
+input.btn-primary,
+button.btn-primary,
+.btn.btn-primary {
+  background: $primary !important;
+  color: lighten($primary, 90) !important;
+  border: 2px solid $primary;
+  &:hover {
+    background: lighten($primary, 90) !important;
+    color: $primary !important;
+  }
+}
 // basic styles
 .input-btn {
   padding: 0;
@@ -353,8 +364,6 @@ body.user-is-tabbing button:focus {
   cursor: pointer;
   position: relative;
   background-size: 16px;
-  @include icon($close, 25px, 25px);
-
   &:hover {
     opacity: 0.5;
   }

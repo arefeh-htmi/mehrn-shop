@@ -4,7 +4,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import actions from "../../actions/index.js";
-import Loader from "../Loader";
+import Loader from "../Common/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 

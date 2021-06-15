@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import FormError from "../../components/Common/FormError";
 import actions from "../../actions/index.js";
-import Loader from "../Loader";
+import Loader from "../Common/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 

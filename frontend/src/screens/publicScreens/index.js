@@ -1,13 +1,24 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route } from "react-router-dom";
-import HomeScreen from "./HomeScreen";
-import LoginScreen from "./LoginScreen";
-import RegisterScreen from "./RegisterScreen";
-import ForgotPassword from "./ForgotPasswordScreen";
-import ResetPassword from "./ResetPasswordScreen";
-import Contact from "./ContactUsScreen";
-import SellWithUs from "./SellWithUsScreen";
-import MerchantSignup from "./MerchantSignupScreen";
+const MerchantSignup = lazy(() =>
+  import("../../components/authentication/MerchantSignup")
+);
+const LoginScreen = lazy(() =>
+  import("../../components/authentication/LoginScreen")
+);
+const RegisterScreen = lazy(() =>
+  import("../../components/authentication/RegisterScreen")
+);
+const ForgotPassword = lazy(() =>
+  import("../../components/authentication/ForgotPassword")
+);
+const ResetPassword = lazy(() =>
+  import("../../components/authentication/ResetPassword")
+);
+const HomeScreen = lazy(() => import("./HomeScreen"));
+
+const Contact = lazy(() => import("./ContactUsScreen"));
+const SellWithUs = lazy(() => import("./SellWithUsScreen"));
 
 const PublicScreens = () => {
   return (
@@ -19,7 +30,6 @@ const PublicScreens = () => {
       <Route path="/contact" component={Contact} />
       <Route path="/sellwithus" component={SellWithUs} />
       <Route path="/merchant-signup/:token" component={MerchantSignup} />
-
       <Route path="/search/:keyword" component={HomeScreen} exact />
       <Route path="/page/:pageNumber" component={HomeScreen} exact />
       <Route
@@ -28,7 +38,6 @@ const PublicScreens = () => {
         exact
       />
       <Route path="/" component={HomeScreen} exact />
-      
     </>
   );
 };

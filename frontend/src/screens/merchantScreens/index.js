@@ -1,22 +1,41 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route } from "react-router-dom";
-import ProductListScreen from "../adminScreens/ProductListScreen";
-import ProductEditScreen from "../adminScreens/ProductEditScreen";
-import OrderListScreen from "../adminScreens/OrderListScreen";
-import BrandListScreen from "../../components/brand/index";
+const ProductList = lazy(() => import("../../components/product/List"));
+const ProductEdit = lazy(() => import("../../components/product/Edit"));
+const ProductAdd = lazy(() => import("../../components/product/Add"));
+const OrderList = lazy(() => import("../../components/order/List.jsx"));
+const BrandList = lazy(() => import("../../components/brand/List"));
+const BrandEdit = lazy(() => import("../../components/brand/Edit"));
+const BrandAdd = lazy(() => import("../../components/brand/Add"));
+const CategoryList = lazy(() => import("../../components/category/List"));
+const CategoryEdit = lazy(() => import("../../components/category/Edit"));
+const CategoryAdd = lazy(() => import("../../components/category/Add"));
+const UserEditScreen = lazy(() => import("../../components/dashboard/UserEditScreen"));
+
+
 const AdminScreens = () => {
   return (
     <>
-      <Route path="/dashboard/productlist" component={ProductListScreen} exact />
+      <Route path="/dashboard/productlist" component={ProductList} exact />
       <Route
         path="/dashboard/productlist/:pageNumber"
-        component={ProductListScreen}
+        component={ProductList}
         exact
       />
-      <Route path="/dashboard/product/:id/edit" component={ProductEditScreen} />
-      <Route path="/dashboard/orderlist" component={OrderListScreen} />
-      {/* <Route path="/dashboard/brand" component={BrandListScreen} /> */}
-      <BrandListScreen />
+      <Route exact path="/dashboard/product/add" component={ProductAdd} />
+      <Route path="/dashboard/product/:id/edit" component={ProductEdit} />
+      <Route path="/dashboard/orderlist" component={OrderList} />
+
+      <Route exact path="/dashboard/brand" component={BrandList} />
+      <Route exact path="/dashboard/brand/edit/:id" component={BrandEdit} />
+      <Route exact path="/dashboard/brand/add" component={BrandAdd} />
+
+      <Route exact path="/dashboard/category" component={CategoryList} />
+      <Route exact path="/dashboard/category/edit/:id" component={CategoryEdit} />
+      <Route exact path="/dashboard/category/add" component={CategoryAdd} />
+
+      <Route path="/dashboard/user/:id/edit" component={UserEditScreen} />
+
     </>
   );
 };

@@ -36,16 +36,6 @@
   width: -webkit-max-content; /* Chrome */
 }
 
-// icon styles
-@mixin icon($icon, $width: null, $height: null) {
-  background-image: $icon;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  height: $width;
-  width: $height;
-}
-
 // badge styles
 @mixin badge() {
   border-radius: 100%;
@@ -74,7 +64,7 @@
   display: -webkit-box;
   -webkit-line-clamp: $numLines;
   -webkit-box-orient: vertical;
-  max-height: $numLines * $lineHeight + unquote('em');
+  max-height: $numLines * $lineHeight + unquote("em");
 }
 
 @mixin text-truncate() {
@@ -128,6 +118,56 @@
   }
 
   :-ms-input-placeholder {
+    @content;
+  }
+}
+
+// Media of at most the maximum breakpoint width. No query for the largest breakpoint.
+// Makes the @content apply to the given breakpoint and narrower.
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+  $max: breakpoint-max($name, $breakpoints);
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media that spans multiple breakpoint widths.
+// Makes the @content apply between the min and max breakpoints
+@mixin media-breakpoint-between(
+  $lower,
+  $upper,
+  $breakpoints: $grid-breakpoints
+) {
+  $min: breakpoint-min($lower, $breakpoints);
+  $max: breakpoint-max($upper, $breakpoints);
+
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower, $breakpoints) {
+      @content;
+    }
+  } @else if $min == null {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
+    }
+  }
+}
+// Media of at least the minimum breakpoint width. No query for the smallest breakpoint.
+// Makes the @content apply to the given breakpoint and wider.
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+  $min: breakpoint-min($name, $breakpoints);
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
     @content;
   }
 }

@@ -33,7 +33,7 @@ class ContactUs extends React.PureComponent {
           <Form.Group controlId="email">
             <Form.Label>Email Address</Form.Label>
             <Form.Control
-              type="email"
+              type="text"
               placeholder="Enter your email address"
               value={contactFormData.email}
               onChange={(e) => contactFormChange("email", e.target.value)}

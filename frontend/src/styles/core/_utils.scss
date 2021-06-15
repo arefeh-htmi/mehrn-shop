@@ -128,11 +128,11 @@
 
 // default link
 .default-link {
-  color: $font-custom-color !important;
+  color: $font-custom-color;
   font-weight: $font-weight-bold-one;
 
   &:hover {
-    text-decoration: underline !important;
+    text-decoration: underline ;
   }
 }
 
