@@ -1,7 +1,7 @@
 {
-  "name": "MernShop",
+  "name": "MehrnShop",
   "version": "1.0.0",
-  "description": "MERN shopping cart app",
+  "description": "",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -11,6 +11,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
+  "author": "arefeh_htmi",
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.919.0",
