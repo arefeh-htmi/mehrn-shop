@@ -4,8 +4,8 @@
 2. Sellers/Merchants can manage their own brand component
 3. Admin(s) can manage and control the entire store components 
 
-![pic1](pic1.png)
-![pic2](pic2.png)
+![pic](pic.png)
+![pic-1](pic-1.png)
 
 ## Languages & tools
 
