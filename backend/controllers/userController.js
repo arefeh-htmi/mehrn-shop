@@ -1,9 +1,7 @@
 import asyncHandler from "express-async-handler";
 import generateToken from "../utils/generateToken.js";
 import User from "../models/userModel.js";
-
-// import { subscribeToNewsletter } from "../utils/mailchimp.js";
-// import { sendEmail } from "../utils/mailgun.js";
+import { subscribeToNewsletter } from "../utils/mailchimp.js";
 
 // @desc    Auth user & get token
 // @route   POST /api/users/login
@@ -88,7 +86,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // checking newsletter subscription field
   let subscribed = false;
   if (isSubscribed) {
-    // const result = await subscribeToNewsletter(email);
+    const result = await subscribeToNewsletter(email);
 
     if (result.status === "subscribed") {
       subscribed = true;
