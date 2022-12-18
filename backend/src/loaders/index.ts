@@ -11,11 +11,7 @@ export default async ({ expressApp }) => {
   Logger.info('✌️ DB loaded and connected!');
 
   /**
-   * WTF is going on here?
-   *
-   * We are injecting the mongoose models into the DI container.
-   * I know this is controversial but will provide a lot of flexibility at the time
-   * of writing unit tests, just go and check how beautiful they are!
+   * TOKNOW: Providing flexibility for test perpuses by injecting the mongoose models into the DI container.
    */
 
   const userModel = {
@@ -24,14 +20,20 @@ export default async ({ expressApp }) => {
     model: require('../models/user_model').default,
   };
 
+  const productModel = {
+    name: 'productModel',
+    model: require('../models/product_model').default,
+  };
+
+  const reviewModel = {
+    name: 'reviewModel',
+    model: require('../models/review_model').default,
+  };
+
   // It returns the agenda instance because it's needed in the subsequent loaders
   const { agenda } = await dependencyInjectorLoader({
     mongoConnection,
-    models: [
-      userModel,
-      // salaryModel,
-      // whateverModel
-    ],
+    models: [userModel, productModel, reviewModel],
   });
   Logger.info('✌️ Dependency Injector loaded');
 

@@ -101,7 +101,7 @@ export class AuthService {
       {
         _id: user._id, // We are gonna use this in the middleware 'isAuth'
         role: user.role,
-        name: user.name,
+        name: user.firstName + user.lastName,
         exp: exp.getTime() / 1000,
       },
       config.jwt.jwtSecret,

@@ -3,9 +3,9 @@ import middlewares from '../middlewares';
 const route = Router();
 
 export const userRute = (app: Router) => {
-  app.use('/users', route);
+  app.use('/user', route);
 
-  route.get('/me', middlewares.isAuthenticated, middlewares.attachCurrentUser, (req: Request, res: Response) => {
+  route.get('/profile', middlewares.isAuthenticated, middlewares.attachCurrentUser, (req: Request, res: Response) => {
     return res.json({ user: req.currentUser }).status(200);
   });
 };

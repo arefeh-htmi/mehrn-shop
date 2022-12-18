@@ -2,13 +2,9 @@ import jwt from 'express-jwt';
 import { config } from '@src/config';
 
 /**
- * We are assuming that the JWT will come in a header with the form
+ * Assuming that the JWT will come in a header
  *
  * Authorization: Bearer ${JWT}
- *
- * But it could come in a query parameter with the name that you want like
- * GET https://my-bulletproof-api.com/stats?apiKey=${JWT}
- * Luckily this API follow _common sense_ ergo a _good design_ and don't allow that ugly stuff
  */
 const getTokenFromHeader = req => {
   /**
@@ -26,7 +22,7 @@ const getTokenFromHeader = req => {
 
 export const isAuthenticated = jwt({
   secret: config.jwt.jwtSecret, // The _secret_ to sign the JWTs
-  algorithms: [config.jwt.jwtAlgorithm], // JWT Algorithm
+  algorithms: config.jwt.jwtAlgorithms, // JWT Algorithm
   userProperty: 'token', // Use req.token to store the JWT
   getToken: getTokenFromHeader, // How to extract the JWT from the request
 });
