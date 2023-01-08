@@ -4,8 +4,9 @@ import Mailgun from 'mailgun.js';
 import { LoggerInstance as Logger } from '@src/loaders/logger_loader';
 import { agendaFactory } from '@src/loaders/agendaFactory_loader';
 import { config } from '@src/config';
+import { Db } from 'mongodb';
 
-export default ({ mongoConnection, models }: { mongoConnection; models: { name: string; model: any }[] }) => {
+export default ({ mongoConnection, models }: { mongoConnection: Db; models: { name: string; model: any }[] }) => {
   try {
     models.forEach(m => {
       Container.set(m.name, m.model);

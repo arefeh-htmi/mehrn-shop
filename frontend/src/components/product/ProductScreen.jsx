@@ -21,7 +21,7 @@ import {
 import { PRODUCT_CREATE_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(1);
+  const [quantity, setquantity] = useState(1);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
@@ -52,7 +52,7 @@ const ProductScreen = ({ history, match }) => {
   }, [dispatch, match, successProductReview]);
 
   const addToCartHandler = () => {
-    history.push(`/cart/${match.params.id}?qty=${qty}`);
+    history.push(`/cart/${match.params.id}?quantity=${quantity}`);
   };
 
   const submitHandler = (e) => {
@@ -123,12 +123,12 @@ const ProductScreen = ({ history, match }) => {
                   {product.countInStock > 0 && (
                     <ListGroup.Item>
                       <Row>
-                        <Col>Qty</Col>
+                        <Col>quantity</Col>
                         <Col>
                           <Form.Control
                             as="select"
-                            value={qty}
-                            onChange={(e) => setQty(e.target.value)}
+                            value={quantity}
+                            onChange={(e) => setquantity(e.target.value)}
                           >
                             {[...Array(product.countInStock).keys()].map(
                               (x) => (

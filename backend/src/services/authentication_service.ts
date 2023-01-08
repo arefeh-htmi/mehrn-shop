@@ -2,8 +2,6 @@ import { Service, Inject } from 'typedi';
 import jwt from 'jsonwebtoken';
 import { MailService } from '@src/services/mail_service';
 import { config } from '@src/config';
-import argon2 from 'argon2';
-import { randomBytes } from 'crypto';
 import { IUser, IUserInputDTO } from '@src/interfaces/IUser';
 import { EventDispatcher, EventDispatcherInterface } from '@src/decorators/eventDispatcher_decorator';
 import { eventsSubscriber as events } from '@src/subscribers/events_subscriber';
@@ -19,15 +17,8 @@ export class AuthService {
 
   public async SignUp(userInputDTO: IUserInputDTO): Promise<{ user: IUser; token: string }> {
     try {
-      const salt = randomBytes(32);
-      this.logger.silly('Hashing password');
-      const hashedPassword =   await argon2.hash(userInputDTO.password, { salt });
       this.logger.silly('Creating user db record');
-      const userRecord = await this.userModel.create({
-        ...userInputDTO,
-        salt: salt.toString('hex'),
-        password: hashedPassword,
-      });
+      const userRecord = await this.userModel.create(userInputDTO);
       this.logger.silly('Generating JWT');
       const token = this.generateToken(userRecord);
 
@@ -40,10 +31,7 @@ export class AuthService {
       this.eventDispatcher.dispatch(events.user.signUp, { user: userRecord });
 
       /**
-       * @TODO This is not the best way to deal with this
-       * There should exist a 'Mapper' layer
-       * that transforms data from layer to layer
-       * but that's too over-engineering for now
+       * TODO: Map data in layers
        */
       const user = userRecord.toObject();
       Reflect.deleteProperty(user, 'password');
@@ -60,11 +48,11 @@ export class AuthService {
     if (!userRecord) {
       throw new Error('User not registered');
     }
-    /**
-     * We use verify from argon2 to prevent 'timing based' attacks
-     */
+
     this.logger.silly('Checking password');
-    const validPassword = await argon2.verify(userRecord.password, password);
+
+    const validPassword = await userRecord.validatePassword(password);
+
     if (validPassword) {
       this.logger.silly('Password is valid!');
       this.logger.silly('Generating JWT');
@@ -73,9 +61,7 @@ export class AuthService {
       const user = userRecord.toObject();
       Reflect.deleteProperty(user, 'password');
       Reflect.deleteProperty(user, 'salt');
-      /**
-       * Easy as pie, you don't need passport.js anymore :)
-       */
+
       return { user, token };
     } else {
       throw new Error('Invalid Password');
@@ -86,20 +72,10 @@ export class AuthService {
     const today = new Date();
     const exp = new Date(today);
     exp.setDate(today.getDate() + 60);
-
-    /**
-     * A JWT means JSON Web Token, so basically it's a json that is _hashed_ into a string
-     * The cool thing is that you can add custom properties a.k.a metadata
-     * Here we are adding the userId, role and name
-     * Beware that the metadata is public and can be decoded without _the secret_
-     * but the client cannot craft a JWT to fake a userId
-     * because it doesn't have _the secret_ to sign it
-     * more information here: https://softwareontheroad.com/you-dont-need-passport
-     */
     this.logger.silly(`Sign JWT for userId: ${user._id}`);
     return jwt.sign(
       {
-        _id: user._id, // We are gonna use this in the middleware 'isAuth'
+        _id: user._id, //used this in the middleware 'isAuth'
         role: user.role,
         name: user.firstName + user.lastName,
         exp: exp.getTime() / 1000,

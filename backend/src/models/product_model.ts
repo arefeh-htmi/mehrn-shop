@@ -5,7 +5,6 @@ const Product = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: 'User',
     },
     name: {
@@ -14,7 +13,6 @@ const Product = new mongoose.Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     brand: {
       type: mongoose.Schema.Types.ObjectId,
@@ -30,6 +28,7 @@ const Product = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Review',
+        default: [],
       },
     ],
     rating: {
@@ -46,6 +45,11 @@ const Product = new mongoose.Schema(
       type: Number,
       required: true,
       default: 0,
+    },
+    currency: {
+      type: String,
+      required: true,
+      default: 'US-dollar',
     },
     countInStock: {
       type: Number,

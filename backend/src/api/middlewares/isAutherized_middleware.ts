@@ -1,4 +1,5 @@
 import { UserRoles } from '@src/types/UserRole';
+import { NextFunction } from 'express';
 
 /**
     Gets a set of autherized roles and checks if user if autherized
@@ -6,7 +7,7 @@ import { UserRoles } from '@src/types/UserRole';
 
 export const isAutherized =
   ({ ...roles }: UserRoles[]) =>
-  (req, res, next) => {
+  (req, res, next): NextFunction => {
     if (!req.user) {
       return res.status(401).send('Unauthorized');
     }

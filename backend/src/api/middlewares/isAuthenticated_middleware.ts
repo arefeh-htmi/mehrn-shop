@@ -2,14 +2,12 @@ import jwt from 'express-jwt';
 import { config } from '@src/config';
 
 /**
- * Assuming that the JWT will come in a header
- *
+ * the JWT will come in a header
  * Authorization: Bearer ${JWT}
  */
-const getTokenFromHeader = req => {
+const getTokenFromHeader = async req => {
   /**
-   * @TODO Edge and Internet Explorer do some weird things with the headers
-   * So I believe that this should handle more 'edge' cases ;)
+   * @TODO Cases for Edge and Internet Explorer
    */
   if (
     (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Token') ||

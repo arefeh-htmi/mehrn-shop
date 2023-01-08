@@ -8,13 +8,9 @@ import { ProductService } from '@src/services/product_service';
 import { IProductInputDTO } from '@src/interfaces/IProduct';
 const route = Router();
 
-export const productRute = (app: Router) => {
+export const productRute = (app: Router): void => {
   app.use('/products', route);
 
-  /*
-  GET 
-    get list of products
-  */
   route.get('/', async (req: Request, res: Response, next: NextFunction) => {
     const logger: Logger = Container.get('logger');
     logger.debug('Calling get Products endpoint with query: %o', req.query);
@@ -30,32 +26,41 @@ export const productRute = (app: Router) => {
     }
   });
 
-  /*
-  POST 
-    add new product 
-  */
+  route.get('/:id', async (req: Request, res: Response, next: NextFunction) => {
+    const logger: Logger = Container.get('logger');
+    logger.debug('Calling get Product endpoint with params: %o', req.params);
+    try {
+      const productServiceInstance = Container.get(ProductService);
+      const productId = req.params.id;
+      const { product } = await productServiceInstance.getProduct(productId);
+      return res.status(201).json({ product });
+    } catch (e) {
+      logger.error('🔥 error: %o', e);
+      return next(e);
+    }
+  });
+
   route.post(
-    '/',
+    '/add',
     celebrate({
       body: Joi.object({
         name: Joi.string().required(),
         description: Joi.string().required(),
-        rating: Joi.number().required(),
-        numReviews: Joi.number().required(),
         price: Joi.number().required(),
         countInStock: Joi.number().required(),
       }),
     }),
     middlewares.isAuthenticated,
-    middlewares.isAutherized([UserRoles.Admin]),
     middlewares.attachCurrentUser,
+    middlewares.isAutherized([UserRoles.Admin, UserRoles.Merchant]),
     async (req: Request, res: Response, next: NextFunction) => {
       const logger: Logger = Container.get('logger');
-      logger.debug('Calling Create new Product endpoint with body: %o', req.body);
+      logger.debug('Calling Add new Product endpoint with body: %o', req.body);
       try {
         const productServiceInstance = Container.get(ProductService);
-        const { poducts } = await productServiceInstance.createProduct(req.body as IProductInputDTO);
-        return res.status(201).json({ poducts });
+        const userId = req.currentUser?.id;
+        const { product } = await productServiceInstance.addProduct(req.body as IProductInputDTO, userId);
+        return res.status(201).json({ product });
       } catch (e) {
         logger.error('🔥 error: %o', e);
         return next(e);
@@ -63,12 +68,51 @@ export const productRute = (app: Router) => {
     },
   );
 
-  route.post(
-    '/:id/reviews',
+  route.put(
+    '/update/:id',
+    celebrate({
+      body: Joi.object({
+        name: Joi.string().optional(),
+        description: Joi.string().optional(),
+        price: Joi.number().optional(),
+        countInStock: Joi.number().optional(),
+      }),
+    }),
     middlewares.isAuthenticated,
     middlewares.attachCurrentUser,
-    (req: Request, res: Response) => {
-      return res.json({ user: req.currentUser }).status(200);
+    middlewares.isAutherized([UserRoles.Admin, UserRoles.Merchant]),
+    async (req: Request, res: Response, next: NextFunction) => {
+      const logger: Logger = Container.get('logger');
+      logger.debug('Calling edit Product endpoint with body: %o and params: %o', req.body, req.params);
+      try {
+        const productServiceInstance = Container.get(ProductService);
+        const productId = req.params.id;
+        const { product } = await productServiceInstance.editProduct(productId, req.body as IProductInputDTO);
+        return res.status(201).json({ product });
+      } catch (e) {
+        logger.error('🔥 error: %o', e);
+        return next(e);
+      }
+    },
+  );
+
+  route.delete(
+    '/delete/:id',
+    middlewares.isAuthenticated,
+    middlewares.attachCurrentUser,
+    middlewares.isAutherized([UserRoles.Admin, UserRoles.Merchant]),
+    async (req: Request, res: Response, next: NextFunction) => {
+      const logger: Logger = Container.get('logger');
+      logger.debug('Calling delete Product endpoint with params: %o', req.params);
+      try {
+        const productServiceInstance = Container.get(ProductService);
+        const productId = req.params.id;
+        const product = await productServiceInstance.deleteProduct(productId);
+        return res.status(201).json({ product });
+      } catch (e) {
+        logger.error('🔥 error: %o', e);
+        return next(e);
+      }
     },
   );
 };

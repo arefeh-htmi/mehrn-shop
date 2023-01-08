@@ -17,7 +17,10 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"]
+      "@src/*": ["src/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": ["./src/**/*", "next-env.d.ts", "twin.d.ts", "**/*.ts", "**/*.tsx"],

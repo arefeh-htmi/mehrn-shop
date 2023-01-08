@@ -1,23 +1,24 @@
+import { MerchantApprovalStatus } from '@src/types';
+
 export interface IMerchant {
-    _id: string;
-    user: string;
-    name: string;
-    image: string;
-    brand: string;
-    description: string;
-    reviews: string[];
-    rating: number;
-    numReviews: number;
-    price: number;
-    countInStock: number;
-  }
-  
-  export interface IMerchantInputDTO {
-    name: string;
-    description: string;
-    rating: number;
-    numReviews: number;
-    price: number;
-    countInStock: number;
-  }
-  
+  _id: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+  brand: string;
+  business: string;
+  isActive: boolean;
+  status: MerchantApprovalStatus;
+  updated: Date;
+  created: Date;
+}
+
+export interface IMerchantInputDTO {
+  name: string;
+  email: string;
+  phoneNumber: string;
+  brand: string;
+  business: string;
+  isActive: boolean;
+  status: MerchantApprovalStatus;
+}

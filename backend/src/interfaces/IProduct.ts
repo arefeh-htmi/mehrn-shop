@@ -9,14 +9,14 @@ export interface IProduct {
   rating: number;
   numReviews: number;
   price: number;
+  currency: string;
   countInStock: number;
 }
 
 export interface IProductInputDTO {
-  name: string;
-  description: string;
-  rating: number;
-  numReviews: number;
-  price: number;
-  countInStock: number;
+  name?: string;
+  description?: string;
+  price?: number;
+  currency?: string;
+  countInStock?: number;
 }

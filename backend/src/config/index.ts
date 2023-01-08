@@ -15,6 +15,10 @@ export const config = {
   port: parseInt(process.env.PORT || '5000', 10),
   envirenment: process.env.NODE_ENV,
   databaseURL: process.env.DATABASE_URI,
+  app: {
+    serverURL: process.env.APP_SERVER_URL,
+    apiURL: process.env.APP_API_URL,
+  },
   jwt: {
     jwtSecret: process.env.JWT_SECRET,
     jwtAlgorithms:
@@ -64,5 +68,15 @@ export const config = {
   mailchimp: {
     apiKey: process.env.MAILCHIMP_API_KEY,
     sender: process.env.MAILCHIMP_SENDER,
+  },
+  google: {
+    clientID: process.env.GOOGLE_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
+  },
+  facebook: {
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
   },
 };

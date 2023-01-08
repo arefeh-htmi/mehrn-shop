@@ -19,11 +19,13 @@ export interface IUser {
 }
 
 export interface IUserInputDTO {
-
-  // provider: string;
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
-  password: string;
+  password?: string;
+}
+
+export interface IUserMethods {
+  validatePassword: (enteredPassword: string) => Promise<boolean>;
 }

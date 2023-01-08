@@ -8,7 +8,7 @@ import { addToCart, removeFromCart } from '../../actions/cartActions'
 const CartScreen = ({ match, location, history }) => {
   const productId = match.params.id
 
-  const qty = location.search ? Number(location.search.split('=')[1]) : 1
+  const quantity = location.search ? Number(location.search.split('=')[1]) : 1
 
   const dispatch = useDispatch()
 
@@ -17,9 +17,9 @@ const CartScreen = ({ match, location, history }) => {
 
   useEffect(() => {
     if (productId) {
-      dispatch(addToCart(productId, qty))
+      dispatch(addToCart(productId, quantity))
     }
-  }, [dispatch, productId, qty])
+  }, [dispatch, productId, quantity])
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
@@ -52,7 +52,7 @@ const CartScreen = ({ match, location, history }) => {
                   <Col md={2}>
                     <Form.Control
                       as='select'
-                      value={item.qty}
+                      value={item.quantity}
                       onChange={(e) =>
                         dispatch(
                           addToCart(item.product, Number(e.target.value))
@@ -86,12 +86,12 @@ const CartScreen = ({ match, location, history }) => {
           <ListGroup variant='flush'>
             <ListGroup.Item>
               <h2>
-                Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                Subtotal ({cartItems.reduce((acc, item) => acc + item.quantity, 0)})
                 items
               </h2>
               $
               {cartItems
-                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .reduce((acc, item) => acc + item.quantity * item.price, 0)
                 .toFixed(2)}
             </ListGroup.Item>
             <ListGroup.Item>
