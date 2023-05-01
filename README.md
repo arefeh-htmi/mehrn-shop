@@ -13,13 +13,6 @@
 <h2>Folder structure and architucture | backend </h2>
 
 Layered architecture with 3 tiers.
-
-Express Route Controller 
-        |    |
-        Service 
-        |    |
-       Mongoose   
-  
 Used SOLID principles and thhe priniciple of sepration of concerns to have lower coupling and higher cohesion 
 Middle pattern is used for validation and auth
 Used a PUB/Sub layer to facilitate calls to 3rd partyy services 
@@ -27,9 +20,10 @@ Used a PUB/Sub layer to facilitate calls to 3rd partyy services
 
 
 src
-│   server.js          # App entry point
-└───api                # Express route controllers for all the endpoints of the app
-└───config             # Environment variables and configuration related stuff
+│   
+|  server.js          
+└───api                
+└───config             
 └───loaders            
 └───models             
 └───services           
@@ -40,6 +34,20 @@ src
 └───types
 
 
+<h2>Folder structure and architucture | frontend </h2>
+public
+src
+│           
+└───actions                
+└───components            
+└───constants            
+└───reducers             
+└───screens
+└───styyles
+└───utils   
+└──app.js     
+└──store.js  
+└──index.css
 
 
 ## Steps to install and run 
