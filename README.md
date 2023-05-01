@@ -21,7 +21,7 @@ Used a PUB/Sub layer to facilitate calls to 3rd partyy services
 
 src
 │   
-|  server.js          
+| server.js        
 └───api                
 └───config             
 └───loaders            
@@ -35,19 +35,19 @@ src
 
 
 <h2>Folder structure and architucture | frontend </h2>
-public
+public <br/>
 src
-│           
-└───actions                
-└───components            
-└───constants            
-└───reducers             
-└───screens
-└───styyles
-└───utils   
-└──app.js     
-└──store.js  
-└──index.css
+│   <br/>        
+└───actions <br/>
+└───components <br/>
+└───constants <br/>
+└───reducers <br/>
+└───screens <br/>
+└───styles <br/>
+└───utils <br/>
+└─app.js <br/>
+└─store.js <br/>
+└─index.css <br/>
 
 
 ## Steps to install and run 
